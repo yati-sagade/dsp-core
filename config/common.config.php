@@ -145,7 +145,6 @@ if ( false !== ( $_managed = Enterprise::isManagedInstance() ) )
     $_privatePath = Enterprise::getPrivatePath();
     $_ownerPrivatePath = Enterprise::getOwnerPrivatePath();
     $_dbConfig = Enterprise::getConfig( 'db' );
-    $_metadata = Enterprise::getConfig( 'metadata' );
 
     $_identity = array(
         'dsp.storage_id'         => $_instanceName,

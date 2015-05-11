@@ -74,19 +74,15 @@ const DEFAULT_CLOUD_API_ENDPOINT = 'http://api.cloud.dreamfactory.com';
 /**
  * @var string
  */
-const DEFAULT_INSTANCE_AUTH_ENDPOINT = 'http://dfe-console.local/api/v1/ops/credentials';
+const DEFAULT_INSTANCE_AUTH_ENDPOINT = 'https://console.enterprise.dreamfactory.com/api/v1/ops/credentials';
 /**
  * @var string
  */
-const DEFAULT_METADATA_ENDPOINT = 'http://dfe-console.local/api/v1/ops/metadata';
+const DEFAULT_METADATA_ENDPOINT = 'https://console.enterprise.dreamfactory.com/api/v1/ops/metadata';
 /**
  * @var string
  */
 const DEFAULT_SUPPORT_EMAIL = 'support@dreamfactory.com';
-/**
- * @var string
- */
-const DEFAULT_ADMIN_RESOURCE_SCHEMA = '/admin.resource_schema.config.php';
 /**
  * @var string
  */
