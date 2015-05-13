@@ -238,7 +238,7 @@ return array_merge(
         /** DSP Information */
         'dsp.version'                   => DSP_VERSION,
         'dsp.fabric_hosted'             => $_fabricHosted,
-        'app.managed_instance'          => $_managed,
+        'dsp.managed_instance'          => $_managed,
         'dsp.no_persistent_storage'     => false,
         'cloud.endpoint'                => DEFAULT_CLOUD_API_ENDPOINT,
         /** 2015-05-07 GHA : I believe these are unused */
