@@ -17,6 +17,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+use DreamFactory\Library\Fabric\Auditing\Services\AuditingService;
 use DreamFactory\Library\Utility\Includer;
 use DreamFactory\Platform\Enums\InstallationTypes;
 use DreamFactory\Platform\Enums\LocalStorageTypes;
@@ -152,6 +153,9 @@ if ( false !== ( $_managed = Enterprise::isManagedInstance() ) )
         'dsp.private_storage_id' => '.private',
         'dsp_name'               => $_instanceName,
     );
+
+    //  Change audit log port for DFE-managed instances
+    AuditingService::getLogger()->setPort( 12202 );
 
     Log::debug( '>> Managed instance "' . $_instanceName . '" found <<' );
 }
