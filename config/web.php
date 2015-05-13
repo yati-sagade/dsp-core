@@ -20,7 +20,6 @@
 use DreamFactory\Library\Utility\Includer;
 use DreamFactory\Platform\Utility\Enterprise;
 use DreamFactory\Platform\Utility\Fabric;
-use DreamFactory\Yii\Utility\Pii;
 use Kisma\Core\Utility\Log;
 
 /**
@@ -39,7 +38,7 @@ if ( !defined( 'DSP_VERSION' ) && file_exists( __DIR__ . '/constants.config.php'
  * Load any environment variables first thing as they may be used by the database config
  */
 /** @noinspection PhpIncludeInspection */
-if ( false !== ( $_envConfig = Pii::includeIfExists( __DIR__ . ENV_CONFIG_PATH, true ) ) )
+if ( false !== ( $_envConfig = Includer::includeIfExists( __DIR__ . ENV_CONFIG_PATH, true ) ) )
 {
     if ( !empty( $_envConfig ) && is_array( $_envConfig ) )
     {

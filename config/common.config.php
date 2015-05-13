@@ -17,6 +17,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+use DreamFactory\Library\Fabric\Auditing\Services\AuditingService;
 use DreamFactory\Library\Utility\Includer;
 use DreamFactory\Platform\Enums\InstallationTypes;
 use DreamFactory\Platform\Enums\LocalStorageTypes;
@@ -106,6 +107,7 @@ if ( false !== ( $_salts = Includer::includeIfExists( __DIR__ . SALT_CONFIG_PATH
         'app.app_name'      => $_appName,
         'app.project_root'  => $_basePath,
         'app.vendor_path'   => $_vendorPath,
+        'app.dfe_instance'  => false,
         'app.log_path'      => $_logFilePath,
         'app.log_file_name' => $_logFileName,
         'app.install_type'  => array($_installType => $_installName),
@@ -152,11 +154,14 @@ if ( false !== ( $_managed = Enterprise::isManagedInstance() ) )
         'dsp_name'               => $_instanceName,
     );
 
+    //  Change audit log port for DFE-managed instances
+    AuditingService::getLogger()->setPort( 12202 );
+
     Log::debug( '>> Managed instance "' . $_instanceName . '" found <<' );
 }
 elseif ( $_fabricHosted )
 {
-    Log::debug( 'Fabric-hosted instance' );
+    Log::debug( '>> Hosted instance found <<' );
 
     $_storagePath = $_storageBasePath = LocalStorageTypes::FABRIC_STORAGE_BASE_PATH . '/' . $_storageKey;
     $_privatePath = \Kisma::get( 'platform.private_path' );
@@ -170,7 +175,7 @@ elseif ( $_fabricHosted )
 }
 else
 {
-    Log::debug( 'Stand-alone instance' );
+    Log::debug( '>> Stand-alone instance found <<' );
 
     $_storagePath = $_storageBasePath = $_basePath . LocalStorageTypes::LOCAL_STORAGE_BASE_PATH;
     $_privatePath = $_basePath . '/storage/.private';
@@ -236,11 +241,12 @@ return array_merge(
         'base_path'                     => $_basePath,
         /** DSP Information */
         'dsp.version'                   => DSP_VERSION,
-        'dsp.auth_endpoint'             => DEFAULT_INSTANCE_AUTH_ENDPOINT,
         'dsp.fabric_hosted'             => $_fabricHosted,
         'dsp.no_persistent_storage'     => false,
         'cloud.endpoint'                => DEFAULT_CLOUD_API_ENDPOINT,
-        'dsp.metadata_endpoint'         => DEFAULT_METADATA_ENDPOINT,
+        /** 2015-05-07 GHA : I believe these are unused */
+        //'dsp.auth_endpoint'             => DEFAULT_INSTANCE_AUTH_ENDPOINT,
+        //'dsp.metadata_endpoint'         => DEFAULT_METADATA_ENDPOINT,
         /** OAuth salt */
         'oauth.salt'                    => 'rW64wRUk6Ocs+5c7JwQ{69U{]MBdIHqmx9Wj,=C%S#cA%+?!cJMbaQ+juMjHeEx[dlSe%h%kcI',
         //  Any keys included from config/keys.config.php
